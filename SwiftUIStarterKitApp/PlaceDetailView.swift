@@ -8,7 +8,6 @@
 
 import SwiftUI
 import Combine
-import WeatherKit
 
 class SelectedPoint: ObservableObject {
     @Published var selectedIndex: Int = 0
@@ -21,13 +20,13 @@ struct PlaceDetailView : View {
     
     @ObservedObject var selectedPoint = SelectedPoint()
     
-    let service = WeatherService()
     var body: some View {
         GeometryReader { g in
             ZStack {
                 if ((self.placeItem?.intentUrl) != nil) {
                     Webview(url: self.placeItem?.intentUrl ?? "https://www.holidayextras.com/?agent=WEB1")
                 } else {
+                    
                     Image(self.placeItem?.famousPointsArray[self.selectedPoint.selectedIndex].pointImage ?? "")
                         .resizable()
                         .frame(width: g.size.width, height: g.size.height)
@@ -39,7 +38,6 @@ struct PlaceDetailView : View {
                     }
 
                     VStack(alignment: .leading) {
-                        Text(service.weather(for: .init(latitude: 37.322998, longitude: -122.032181)),
                         Text(self.placeItem?.activityPlace ?? "")
                             .foregroundColor(Color.white)
                             .font(.system(size: 30, weight: .bold, design: .default))
