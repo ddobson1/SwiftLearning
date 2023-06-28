@@ -26,7 +26,8 @@ struct PlaceDetailView : View {
                 if ((self.placeItem?.intentUrl) != nil) {
                     Webview(url: self.placeItem?.intentUrl ?? "https://www.holidayextras.com/?agent=WEB1")
                 } else {
-                    
+//                    MapView()
+//                    Authentication()
                     Image(self.placeItem?.famousPointsArray[self.selectedPoint.selectedIndex].pointImage ?? "")
                         .resizable()
                         .frame(width: g.size.width, height: g.size.height)
@@ -36,8 +37,8 @@ struct PlaceDetailView : View {
                         .onDisappear {
                             self.isShowing = false
                     }
-
                     VStack(alignment: .leading) {
+                        Authentication()
                         Text(self.placeItem?.activityPlace ?? "")
                             .foregroundColor(Color.white)
                             .font(.system(size: 30, weight: .bold, design: .default))
